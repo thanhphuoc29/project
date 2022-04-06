@@ -3,7 +3,7 @@
 using namespace std;
 
 int a[1005][1005],V,E,u,check[1005]={0},n,kt=0;
-
+/*****************Nhap ma tran***********************/
 void input(){
 	for(int i=1;i<=V;i++){
 		for(int j=1;j<=V;j++){
