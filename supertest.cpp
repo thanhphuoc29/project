@@ -19,6 +19,7 @@ void dfs(int u){
 		}
 	}
 }
+/****************Kiem tra lien thong**************************/
 bool check_connected(){
 	dfs(u);
 	for(int i=1;i<=V;i++){
@@ -26,6 +27,7 @@ bool check_connected(){
 	}
 	return true;
 }
+/**********************Kiem tra euler**************************/
 bool check_euler(){
 	if(check_connected()){
 		int d=0;
@@ -34,12 +36,13 @@ bool check_euler(){
 			for(int j=1;j<=V;j++){
 				if(a[i][j]==1) d++;
 			}
-			if(d%2 != 0) return false;
+			if(d%2 != 0) return false;//kien tra dinh le
 		}
 		return true;
 	}
 	return false;
 }
+/***************Tim dinh ke************************/
 int ke(int u){
 	int kt=0;
 	for(int i=1;i<=V;i++){
@@ -47,6 +50,22 @@ int ke(int u){
 	}
 	return 0;
 }
+/****************************Tim dinh le*************************/
+void find_odd_point(){
+	int d=0;
+	for(int i=1;i<=V;i++){
+		d=0;
+		for(int j=1;j<=V;j++){
+			if(a[i][j]>0) d++;
+		}
+		if(d%2 != 0) point.push_back(i);
+	}
+}
+/*********************Tim duong di giua hai dinh le****************************/
+int find_way(int s,int t){
+	
+}
+/**************************Tim chu trinh euler******************************/
 void find_euler(int u){
 	stack<int>s;
 	vector<int>CE;
