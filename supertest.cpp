@@ -112,10 +112,12 @@ int main(){
 			break;
 		}	
 	}
-	
-	if(check_euler()){
-		cout<<"Chu trinh euler: ";
-		find_euler(u);
+	if(check_connected()){
+		if(check_euler()){
+			cout<<"Hanh trinh toi uu cua nguoi dua thu: ";
+			find_euler(u);
+		}
+		else cout<<"Khong phai do thi euler !";
 	}
-	else cout<<"Khong phai do thi euler !";
+	else cout<<"Do thi khong lien thong!";
 }
