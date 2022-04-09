@@ -3,11 +3,14 @@
 using namespace std;
 
 int a[1005][1005],V,E,u,check[1005]={0},n,kt=0;
+vector<int>point;//luu cac dinh le
+int way[1005][1005];// ma tran luu cac doan duong di, cac duong noi dinh chan gan =1, cac dinh le gan =2
 /******************Nhap ma tran*********************/
 void input(){
 	for(int i=1;i<=V;i++){
 		for(int j=1;j<=V;j++){
 			cin>>a[i][j];
+			way[i][j]=1;
 		}
 	}
 }
@@ -58,13 +61,23 @@ void find_odd_point(){
 		for(int j=1;j<=V;j++){
 			if(a[i][j]>0) d++;
 		}
-		if(d%2 != 0) point.push_back(i);
+		if(d%2 != 0) point.push_back(i);//luu cac dinh le
 	}
 }
 /*********************Tim duong di giua hai dinh le****************************/
 int find_way(int s,int t){
+
+}
+/********************Phan hoach cac dinh le,lua chon duong di ngan nhat giua cac dinh le************************/
+void partition(){//phan hoach
 	
 }
+/************************Them canh vao do thi************************/
+void add_path(){
+	for(int i=0;i<point.size();i+=2) 
+	way[point[i]][point[i+1]]=way[point[i+1]][point[i]]=2;//duong di giua cac dinh le gan = 2 (di qua 2 lan)
+}
+
 /**************************Tim chu trinh euler******************************/
 void find_euler(int u){
 	stack<int>s;
@@ -75,8 +88,11 @@ void find_euler(int u){
 		if(ke(d) != 0){
 			int t=ke(d);
 			s.push(t);
-			a[d][t]=0;
-			a[t][d]=0;
+			way[d][t]--;way[t][d]--;//xoa nhung duong da di qua
+			if(odd[d][t]==0 && odd[t][d]==0){//neu khong con duong di => loai canh khoi do thi
+				a[d][t]=0;
+				a[t][d]=0;
+			}
 		}
 		else{
 			s.pop();
@@ -117,7 +133,14 @@ int main(){
 			cout<<"Hanh trinh toi uu cua nguoi dua thu: ";
 			find_euler(u);
 		}
-		else cout<<"Khong phai do thi euler !";
+		else{
+			cout<<"Khong phai do thi euler !"<<endl;
+			cout<<"Khoi tao do thi euler moi\n Hanh trinh toi uu cua nguoi dua thu la: ";
+			find_odd_point();
+			partition();//phan hoach
+			add_path();
+			find_euler();
+		}
 	}
 	else cout<<"Do thi khong lien thong!";
 }
