@@ -17,7 +17,7 @@ int pre[maxn];
  
 
 /******************Nhap ma tran*********************/
-void dijkstra1(int s,int t)
+void partition(int s,int t)//phan hoach
 {
 	vector<ll> d(n + 1, INF);
 	d[s] = 0;
@@ -55,7 +55,7 @@ void dijkstra1(int s,int t)
 		way[path[i+1]][path[i]]++;
 	}
 }
-int dijkstra(int s,int t)
+int find_way(int s,int t)
 {
 	vector<ll> d(n + 1, INF);
 	d[s] = 0;
@@ -114,7 +114,7 @@ void xu_ly_dinh_le()
 		dijkstra1(hv[tmp][i],hv[tmp][i+1]);
 	}
 }
-void nhap()
+void input()
 {
 	for(int i = 1;i <= V;i++)
 	{
@@ -135,7 +135,7 @@ void nhap()
 		}	
 	}
 	xu_ly_dinh_le();
-}
+	}
 }
 void dfs(int u){
 	check[u]=1;
@@ -188,18 +188,8 @@ void find_odd_point(){
 	}
 }
 /*********************Tim duong di giua hai dinh le****************************/
-int find_way(int s,int t){
 
-}
-/********************Phan hoach cac dinh le,lua chon duong di ngan nhat giua cac dinh le************************/
-void partition(){//phan hoach
-	
-}
 /************************Them canh vao do thi************************/
-void add_path(){
-	for(int i=0;i<point.size();i+=2) 
-	way[point[i]][point[i+1]]=way[point[i+1]][point[i]]=2;//duong di giua cac dinh le gan = 2 (di qua 2 lan)
-}
 
 /**************************Tim chu trinh euler******************************/
 void find_euler(int u){
@@ -259,7 +249,7 @@ int main(){
 		else{
 			cout<<"Khong phai do thi euler !"<<endl;
 			cout<<"Khoi tao do thi euler moi\n Hanh trinh toi uu cua nguoi dua thu la: ";
-			find_odd_point();
+			
 			partition();//phan hoach
 			add_path();
 			find_euler();
