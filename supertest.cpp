@@ -99,6 +99,7 @@ void find_euler(int u){
 	}
 	for(int i=CE.size()-1;i>=0;i--) cout<<CE[i]<<" ";
 }
+/**********************truy vet duong di giua hai dinh le ngan nhat****************************************/
 void trace(int s,int t)//truy vet
 {
 	vector<ll> d(V + 1, INF);
@@ -138,6 +139,7 @@ void trace(int s,int t)//truy vet
 		way[path[i+1]][path[i]]++;
 	}
 }
+/*****************tim duong di giua hai dinh le*************************************/
 int find_way(int s,int t)
 {
 	vector<ll> d(V + 1, INF);
@@ -165,7 +167,7 @@ int find_way(int s,int t)
 	}
 	return d[t];
 }
-
+/******************Khoi tao do thi moi( them cac duong di toi uu giua cac cap dinh le)*******************/
 void creat_graph()
 {
 	for(int i = 1;i <= V;i++)
@@ -198,8 +200,6 @@ void creat_graph()
 		trace(hv[tmp][i],hv[tmp][i+1]);
 	}
 }
-
-
 int main(){
 	cout<< "---------- Chu trinh euler va bai toan nguoi dua thu ------------"<<endl;
 	cout<<"Moi ban chon che do nhap: (1/2)"<<endl;
