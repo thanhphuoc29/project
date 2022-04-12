@@ -24,17 +24,8 @@ void input()
 		{
 			cin >> a[i][j];
 			way[i][j]=1;
+			if(a[i][j] >0) adj[i].push_back({j, a[i][j]});
 		}
-	}
-	for(int i = 1;i <= V;i++)
-	{
-		for(int j = 1;j <= V;j++)
-		{
-			if(a[i][j]>0)
-			{
-				adj[i].push_back({j, a[i][j]});
-			}
-		}	
 	}
 }
 void dfs(int u){//duyet cac dinh bang dfs
@@ -99,7 +90,6 @@ void find_euler(int u){
 	}
 	for(int i=CE.size()-1;i>=0;i--) cout<<CE[i]<<" ";
 }
-/**********************truy vet duong di giua hai dinh le ngan nhat****************************************/
 void trace(int s,int t)//truy vet
 {
 	vector<ll> d(V + 1, INF);
@@ -139,7 +129,6 @@ void trace(int s,int t)//truy vet
 		way[path[i+1]][path[i]]++;
 	}
 }
-/*****************tim duong di giua hai dinh le*************************************/
 int find_way(int s,int t)
 {
 	vector<ll> d(V + 1, INF);
@@ -167,7 +156,7 @@ int find_way(int s,int t)
 	}
 	return d[t];
 }
-/******************Khoi tao do thi moi( them cac duong di toi uu giua cac cap dinh le)*******************/
+
 void creat_graph()
 {
 	for(int i = 1;i <= V;i++)
@@ -200,6 +189,8 @@ void creat_graph()
 		trace(hv[tmp][i],hv[tmp][i+1]);
 	}
 }
+
+
 int main(){
 	cout<< "---------- Chu trinh euler va bai toan nguoi dua thu ------------"<<endl;
 	cout<<"Moi ban chon che do nhap: (1/2)"<<endl;
@@ -220,9 +211,14 @@ int main(){
 			else{
 				fpi>>V>>u;
 				for(int i=1;i<=V;i++){
-				for(int j=1;j<=V;j++) fpi>>a[i][j];
-				cout<<"Nhap file thanh cong!"<<endl;
+					for(int j=1;j<=V;j++){
+						fpi>>a[i][j];
+						way[i][j]=1;
+						if(a[i][j] > 0) adj[i].push_back({j, a[i][j]});
+					}
 				}
+				
+				cout<<"Nhap file thanh cong!"<<endl;
 			}
 			break;
 		}	
@@ -240,4 +236,6 @@ int main(){
 		}
 	}
 	else cout<<"Do thi khong lien thong!";
+	cout<<endl;
+	system("pause");
 }
