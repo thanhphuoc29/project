@@ -6,13 +6,13 @@ int a[1005][1005],V,E,u,check[1005]={0},n,kt=0;
 vector<int>point;//luu cac dinh le
 int way[1005][1005];// ma tran luu cac doan duong di, cac duong noi dinh chan gan =1, cac dinh le gan =2
 const int maxn = 100001;
-vector<pair<int, int> > adj[maxn];
-vector<int>dl;
+vector<pair<int, int> > adj[maxn];//luu cac dinh ke va trong so vd dinh 1 ke voi 2,3 => adj[1]={2,3}
+vector<int>dl;//luu cac dinh le
 vector<int>hv[maxn];
 vector<int>gt_hv;
 
 const int INF = 1e9;
-int pre[maxn];
+int pre[maxn];//luu dinh truoc cua s
  
 
 /******************Nhap ma tran*********************/
@@ -40,9 +40,9 @@ void dfs(int u){//duyet cac dinh bang dfs
 bool check_connected(){
 	dfs(u);
 	for(int i=1;i<=V;i++){
-		if(check[i]==0) return false;
+		if(check[i]==0) return false;//neu ton tai dinh chua dc xet se tra ve false
 	}
-	return true;
+	return true;//cac dinh da dc xet
 }
 /**********************Kiem tra euler**************************/
 bool check_euler(){
@@ -63,9 +63,9 @@ bool check_euler(){
 int ke(int u){
 	int kt=0;
 	for(int i=1;i<=V;i++){
-		if(a[u][i]>0) return i;
+		if(a[u][i]>0) return i;//tra ve dinh ke cua u
 	}
-	return 0;
+	return 0;//khong co se tra ve 0
 }
 /**************************Tim chu trinh euler******************************/
 void find_euler(int u){
@@ -90,24 +90,24 @@ void find_euler(int u){
 	}
 	for(int i=CE.size()-1;i>=0;i--) cout<<CE[i]<<" ";
 }
-void trace(int s,int t)//truy vet
+void trace(int s,int t)//truy vet + phan hoach
 {
 	vector<ll> d(V + 1, INF);
-	d[s] = 0;
+	d[s] = 0;//gan nhan d[s]=0
 	pre[s]=s; 
-	priority_queue<pair<int, int>, vector<pair<int, int> > , greater<pair<int,int> > > Q;
+	priority_queue<pair<int, int>, vector<pair<int, int> > , greater<pair<int,int> > > Q;//dung hang doi uu tien (phan tu top se nho nhat)
 	Q.push({0, s});
 	while(!Q.empty())
 	{
-		pair<int, int> top = Q.top(); Q.pop();
-		int u = top.second;
-		int kc = top.first;
+		pair<int, int> top = Q.top(); Q.pop();/
+		int u = top.second;//s
+		int kc = top.first;//d[s]
 		if(kc > d[u]) continue;
 		for(int i = 0;i < adj[u].size();i++)
 		{
 			pair<int,int>it = adj[u][i];
-			int v = it.first;
-			int w = it.second;
+			int v = it.first;// lay ra dinh ke voi u
+			int w = it.second;//lay ra trong so (khoang cach tu u->i
 			if(d[v] > d[u] + w){
 				d[v] = d[u] + w;
 				Q.push({d[v], v});
@@ -122,14 +122,15 @@ void trace(int s,int t)//truy vet
 		if(t==s)	break;
 		t = pre[t];
 	}
+	//them duong di toi uu vao do thi
 	reverse(path.begin(),path.end());
 	for(int i = 0;i < path.size()-1;i++)
 	{
-		way[path[i]][path[i+1]]++;
-		way[path[i+1]][path[i]]++;
+		way[path[i]][path[i+1]]++;//them duong di tu u->v vao do thi
+		way[path[i+1]][path[i]]++;//them duong di tu v->u vao do thi
 	}
 }
-int find_way(int s,int t)
+int find_way(int s,int t)//dung thuat toan diijectra
 {
 	vector<ll> d(V + 1, INF);
 	d[s] = 0;
@@ -164,10 +165,10 @@ void creat_graph()
 		if(adj[i].size()%2==1)	dl.push_back(i);
 	}
 	int k = 0,k1 = 0;
-	while(next_permutation(dl.begin(),dl.end()))
+	while(next_permutation(dl.begin(),dl.end()))//tim hoan vi cua tap dinh le ke tiep
 	{
 		k++;
-		if(k%2==1)
+		if(k%2==1)//tranh lap lai hoan vi 
 		{
 			int value = 0;
 			for(int i = 0;i < dl.size();i+=2)
@@ -186,7 +187,7 @@ void creat_graph()
 	int tmp = min_element(a,a+gt)-a;
 	for(int i = 0;i < hv[tmp].size();i+=2)	
 	{
-		trace(hv[tmp][i],hv[tmp][i+1]);
+		trace(hv[tmp][i],hv[tmp][i+1]);//truy vet duong di giua hai dinh
 	}
 }
 
@@ -223,10 +224,10 @@ int main(){
 			break;
 		}	
 	}
-	if(check_connected()){
+	if(check_connected()){//kiem tra do thi lien thong
 		if(check_euler()){
 			cout<<"Hanh trinh toi uu cua nguoi dua thu: ";
-			find_euler(u);
+			find_euler(u);//dua ra hanh trinh toi uu
 		}
 		else{
 			cout<<"Khong phai do thi euler !"<<endl;
