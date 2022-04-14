@@ -3,13 +3,12 @@
 using namespace std;
 
 int a[1005][1005],V,E,u,check[1005]={0},n,kt=0;
-vector<int>point;//luu cac dinh le
 int way[1005][1005];// ma tran luu cac doan duong di, cac duong noi dinh chan gan =1, cac dinh le gan =2
 const int maxn = 100001;
 vector<pair<int, int> > adj[maxn];//luu cac dinh ke va trong so vd dinh 1 ke voi 2,3 => adj[1]={2,3}
 vector<int>dl;//luu cac dinh le
-vector<int>hv[maxn];
-vector<int>gt_hv;
+vector<int>hv[maxn];//luu hoan vi
+vector<int>gt_hv;//luu trong so cua cac hoan vi
 
 const int INF = 1e9;
 int pre[maxn];//luu dinh truoc cua s
