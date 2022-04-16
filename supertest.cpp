@@ -94,7 +94,7 @@ void trace(int s,int t)									//truy vet + phan hoach
 	Q.push({0, s});
 	while(!Q.empty())
 	{
-		pair<int, int> top = Q.top(); Q.pop();/
+		pair<int, int> top = Q.top(); Q.pop();
 		int u = top.second;									//s
 		int kc = top.first;									//d[s]
 		if(kc > d[u]) continue;									// tránh trong stack có trường hợp (1,2),(2,2) sẽ xét cả (2,2)
@@ -150,7 +150,7 @@ int find_way(int s,int t)			//dung thuat toan dijkstra
 			}
 		}
 	}
-	return d[t];		trả về tổng đường đi ngắn nhất từ s đến t
+	return d[t];		//tra ve do dai quang duong ngan nhat tu s -> t
 }
 
 void creat_graph()
