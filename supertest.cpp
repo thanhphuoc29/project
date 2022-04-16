@@ -5,7 +5,7 @@ using namespace std;
 int a[1005][1005],V,E,u,check[1005]={0},n,kt=0;
 int way[1005][1005];  				// ma tran luu cac doan duong di, cac duong noi dinh chan gan =1, cac dinh le gan =2
 const int maxn = 100001;
-vector<pair<int, int> > adj[maxn];		//luu cac dinh ke va trong so vd dinh 1 ke voi 2,3 => adj[1]={2,3}
+vector<pair<int, int> > adj[maxn];		//luu cac dinh ke va trong so vd dinh 1 ke voi 2,3 => adj[1]={2,3}(danh sach ke)
 vector<int>dl;					//luu cac dinh le
 vector<int>hv[maxn];				//luu hoan vi
 vector<int>gt_hv;				//luu trong so cua cac hoan vi
@@ -23,7 +23,7 @@ void input()
 		{
 			cin >> a[i][j];
 			way[i][j]=1;
-			if(a[i][j] >0) adj[i].push_back({j, a[i][j]}); 			//  ma trận kề 
+			if(a[i][j] >0) adj[i].push_back({j, a[i][j]}); 			//  danh sach ke
 		}
 	}
 }
@@ -48,7 +48,7 @@ bool check_euler(){
 	if(check_connected()){	
 		for(int i=1;i<=V;i++)
 		{
-		 	if(adj[i].size()%2==1)	return false;				//kien tra dinh le
+		 	if(adj[i].size()%2==1)	return false;				//kiem tra dinh le
 		}
 		return true;
 	}
@@ -103,7 +103,7 @@ void trace(int s,int t)									//truy vet + phan hoach
 			pair<int,int>it = adj[u][i];
 			int v = it.first;								// lay ra dinh ke voi u
 			int w = it.second;								//lay ra trong so (khoang cach tu u->i)
-			if(d[v] > d[u] + w){								//xét cách đi đến đỉnh v theo cách mới( nếu khoảng cách  3-4 > 3 -4 -2 thì đi qua 3-4-2)
+			if(d[v] > d[u] + w){								//xet cach đi đến đinh v theo cách mới( neu khoang cach  3-4 > 3 -4 -2 thi đi qua 3-4-2)
 				d[v] = d[u] + w;
 				Q.push({d[v], v});
 				pre[v] = u;
