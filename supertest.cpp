@@ -179,7 +179,7 @@ void creat_graph()
 	int gt = gt_hv.size();
 	int a[gt];
 	copy(gt_hv.begin(),gt_hv.end(),a);
-	int tmp = min_element(a,a+gt)-a;
+	int tmp = min_element(a,a+gt)-a;//luu vi tri chua phan hoach toi uu
 	for(int i = 0;i < hv[tmp].size();i+=2)	
 	{
 		trace(hv[tmp][i],hv[tmp][i+1]);//truy vet duong di giua hai dinh
