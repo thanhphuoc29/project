@@ -157,7 +157,7 @@ void creat_graph()
 {
 	for(int i = 1;i <= V;i++)
 	{
-		if(adj[i].size()%2==1)	dl.push_back(i);
+		if(adj[i].size()%2==1)	dl.push_back(i);//tim cac dinh le them vao vector dl
 	}
 	int k = 0,k1 = 0;
 	while(next_permutation(dl.begin(),dl.end()))//tim hoan vi cua tap dinh le ke tiep
