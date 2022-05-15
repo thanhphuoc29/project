@@ -85,7 +85,7 @@ void find_euler(int u){
 	}
 	for(int i=CE.size()-1;i>=0;i--) cout<<CE[i]<<" ";
 }
-void trace(int s,int t)									//truy vet + phan hoach
+void trace(int s,int t)									//truy vet + them duong di vao do thi
 {
 	vector<ll> d(V + 1, INF);
 	d[s] = 0;//gan nhan d[s]=0
